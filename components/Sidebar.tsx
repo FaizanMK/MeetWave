@@ -14,14 +14,15 @@ const Sidebar = () => {
         {sidebarLinks.map((link) => {
           // sometimes our path will be like meeting/123 that's why we need startsWith function
           const isActive =
-            pathname === link.route || pathname.startsWith(link.route);
+            pathname === link.route || pathname.startsWith(`${link.route}/`);
+
           return (
             <Link
               href={link.route}
               key={link.label}
               // cn is short for classNames, it allows us to add multiple and dynamic classNames
               className={cn(
-                "flex gap-4 items-center p-4 rounded-lg justify-start",
+                "flex gap-4 items-center p-4 rounded-lg w-full max-w-60",
                 {
                   "bg-blue-1": isActive,
                   // if isActive is true then add this class
@@ -31,12 +32,10 @@ const Sidebar = () => {
               <Image
                 src={link.imgUrl}
                 alt={link.label}
-                width={24}
-                height={24}
+                width={20}
+                height={20}
               />
-              <p className="text-lg font-semibold max-lg:hidden">
-                {link.label}
-              </p>
+              <p className=" font-semibold ">{link.label}</p>
             </Link>
           );
         })}
